@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "AddSearchForChrome",
+  "version": "0.1",
+  "author": "K.E.Y.",
+  "description": "K Tool",
+  "permissions": [
+    "contextMenus"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
