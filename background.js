@@ -1,7 +1,8 @@
 const menus = [
   ["twitterで検索", "selection"],
   ["YouTubeで検索", "selection"],
-  ["twitterでtweetを検索", "link"],
+  ["twitterのユーザ内検索", "link"],
+  ["ショート再表示", "link"],
 ];
 
 chrome.runtime.onInstalled.addListener(handlerInstalled);
@@ -43,6 +44,17 @@ function handlerClick(item, tab) {
       let tmp = item.linkUrl.split("/");
       const url = new URL(`https://x.com/search?src=typed_query&f=live`);
       url.searchParams.set('q', `from:${tmp[3]}`);
+      chrome.tabs.create({ url: url.href, index: tab.index + 1 });
+      break;
+    }
+    case 'menu_3': {
+      if (!item.linkUrl.startsWith("https://www.youtube.com/shorts")) {
+        break;
+      }
+
+      let tmp = item.linkUrl.split("/");
+      const url = new URL(`https://www.youtube.com/watch`);
+      url.searchParams.set('v', tmp[4]);
       chrome.tabs.create({ url: url.href, index: tab.index + 1 });
       break;
     }
